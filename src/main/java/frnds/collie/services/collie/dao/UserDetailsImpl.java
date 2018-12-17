@@ -11,13 +11,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "RI_USER_DETAILS")
 public class UserDetailsImpl {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer userId;
+	@GenericGenerator(name = "sequence_id", strategy = "frnds.collie.services.collie.idGenrator.UserIdGenerator")
+	@GeneratedValue(generator = "sequence_id")
+	@Column(name = "user_id")
+	private String userId;
 
 	@Column(name = "USER_ROLE_ID")
 	private String userRoleDetails;
@@ -31,9 +35,9 @@ public class UserDetailsImpl {
 	@Column(name = "MIDDLENAME")
 	private String middleName;
 
-	@Column(name="Other_Delievery_Address",nullable=true)
+	@Column(name = "Other_Delievery_Address", nullable = true)
 	private String otherAddresses;
-	
+
 	@Column
 	private String gender;
 
@@ -46,8 +50,8 @@ public class UserDetailsImpl {
 	@Column
 	private String secondaryPhone;
 
-	@Column
-	private String email;
+	@Column(name="User_Name")
+	private String userName;
 
 	@Column(nullable = true)
 	private String pancard;
@@ -136,14 +140,6 @@ public class UserDetailsImpl {
 		this.secondaryPhone = secondaryPhone;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPancard() {
 		return pancard;
 	}
@@ -208,11 +204,11 @@ public class UserDetailsImpl {
 		this.addressId = addressId;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -222,6 +218,14 @@ public class UserDetailsImpl {
 
 	public void setOtherAddresses(String otherAddresses) {
 		this.otherAddresses = otherAddresses;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

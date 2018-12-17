@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import frnds.collie.services.collie.dao.UserDetailsImpl;
 
-public interface UserDetailsRepositry extends CrudRepository<UserDetailsImpl, Integer> {
+public interface UserDetailsRepositry extends CrudRepository<UserDetailsImpl, String> {
 
-	Optional<UserDetailsImpl> findByEmail(String mailId);
+	Optional<UserDetailsImpl> findByUserName(String userName);
 }

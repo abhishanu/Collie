@@ -40,6 +40,9 @@ public class LogInService {
 
 	@Autowired
 	RoleRepository roleRepository;
+	
+	@Autowired
+	UserServices userServices;
 
 	public String logIn(String id, String pwd) {
 		Authentication authentication = authenticationManager
@@ -88,6 +91,8 @@ public class LogInService {
 				
 				login.setRoles(Collections.singleton(userRole));
 				String details = saveLogInDetails(login);
+				
+				userServices.saveUserDetails(email);
 
 				if (details.equalsIgnoreCase("-1")) {
 

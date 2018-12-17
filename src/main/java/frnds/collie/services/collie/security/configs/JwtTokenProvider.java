@@ -28,11 +28,11 @@ public class JwtTokenProvider {
 		UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
 		Date now = new Date();
-		
+
 		// 2*24*60*jwtExpirationInMs (Represents 2 days)
-		Date expiryDate = new Date(now.getTime() + 2*24*60*jwtExpirationInMs);
-		return Jwts.builder().setSubject(userPrincipal.getUsername()).setIssuedAt(new Date())
-				.setExpiration(expiryDate).signWith(SignatureAlgorithm.HS256, jwtSecret).compact();
+		Date expiryDate = new Date(now.getTime() + 2 * 24 * 60 * jwtExpirationInMs);
+		return Jwts.builder().setSubject(userPrincipal.getUsername()).setIssuedAt(new Date()).setExpiration(expiryDate)
+				.signWith(SignatureAlgorithm.HS256, jwtSecret).compact();
 	}
 
 	public String getUserIdFromJWT(String token) {
@@ -46,8 +46,11 @@ public class JwtTokenProvider {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
 			return true;
 		} catch (SignatureException ex) {
+			System.out.println("Not a valid token signature:" + ex.getMessage());
 		} catch (MalformedJwtException ex) {
+			System.out.println("Token malformed:" + ex.getMessage());
 		} catch (ExpiredJwtException ex) {
+			System.out.println("Token Exprired:" + ex.getMessage());
 		} catch (UnsupportedJwtException ex) {
 		} catch (IllegalArgumentException ex) {
 		}

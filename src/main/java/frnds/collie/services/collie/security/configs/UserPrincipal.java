@@ -15,7 +15,7 @@ import frnds.collie.services.collie.dao.Login;
 import frnds.collie.services.collie.dao.UserDetailsImpl;
 
 public class UserPrincipal implements UserDetails {
-	private Integer userId;
+	private String userId;
 
 	private String name;
 
@@ -26,7 +26,7 @@ public class UserPrincipal implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrincipal(Integer useId, String name, String username, String password,
+	public UserPrincipal(String useId, String name, String username, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.userId = useId;
 		this.name = name;
@@ -41,10 +41,10 @@ public class UserPrincipal implements UserDetails {
 
 		String name = user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName();
 
-		return new UserPrincipal(user.getUserId(), name, user.getEmail(), login.getPass(), authorities);
+		return new UserPrincipal(user.getUserId(), name, user.getUserName(), login.getPass(), authorities);
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return userId;
 	}
 

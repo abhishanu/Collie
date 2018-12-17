@@ -12,7 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import frnds.collie.services.collie.utilites.AuditFields;
+import frnds.collie.services.collie.utilities.AuditFields;
 
 @Entity
 @Table(name = "ri_login_details")

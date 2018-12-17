@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Login login = logInRepositry.findByUserId(usernameOrEmail)
 				.orElseThrow(() -> new UsernameNotFoundException("User Name not found"));
 
-		UserDetailsImpl user = userDetailsRepositry.findByEmail(usernameOrEmail)
+		UserDetailsImpl user = userDetailsRepositry.findByUserName(usernameOrEmail)
 				.orElseThrow(() -> new UsernameNotFoundException("User Name not found"));
 
 		return UserPrincipal.create(login, user);
@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Login login = logInRepositry.findByUserId(id)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
 
-		UserDetailsImpl user = userDetailsRepositry.findByEmail(login.getUserId())
+		UserDetailsImpl user = userDetailsRepositry.findByUserName(login.getUserId())
 				.orElseThrow(() -> new UsernameNotFoundException("User Name not found"));
 
 		return UserPrincipal.create(login, user);

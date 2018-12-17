@@ -1,4 +1,4 @@
-package frnds.collie.services.collie.utilites;
+package frnds.collie.services.collie.utilities;
 
 import java.util.Date;
 
